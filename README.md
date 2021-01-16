@@ -1,8 +1,8 @@
 # BlueToothSniffer
 
-<h1 align="center">
-	<img src="https://i.ibb.co/8Pmwgch/sniff-bluetooth.png" alt="Sniffer">
-</h1>
+
+<img src="https://i.ibb.co/8Pmwgch/sniff-bluetooth.png" alt="Sniffer">
+
 
 > here is my code : 
 ```c
