@@ -1,6 +1,8 @@
 # BlueToothSniffer
 
-![sniff with monitor mode](https://i.ibb.co/8Pmwgch/sniff-bluetooth.png)
+<h1 align="center">
+	<img src="https://i.ibb.co/8Pmwgch/sniff-bluetooth.png" alt="Sniffer">
+</h1>
 
 > here is my code : 
 ```c
