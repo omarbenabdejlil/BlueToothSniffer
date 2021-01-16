@@ -76,18 +76,18 @@ int hci_open_dev( int dev_id );
 - [!] Note : 
   - It is not a good idea to hard-code the device number 0, because that is not always the id of the first adapter. For example, if there were two adapters on the system and the first adapter (id 0) is disabled, then the first available adapter is the one with id 1 .
   
-> If there are multiple Bluetooth adapters present, then to choose the adapter with address ``01:23:45:67:89:AB", pass the char * representation of the address to hci_devid and use that in place of hci_get_route :
+> If there are multiple Bluetooth adapters present, then to choose the adapter with address `01:23:45:67:89:AB`, pass the char * representation of the address to hci_devid and use that in place of hci_get_route :
 ```c
 
 int dev_id = hci_devid( "01:23:45:67:89:AB" );
 ```
 
-> After choosing the local Bluetooth adapter to use and allocating system resources, the program is ready to scan for nearby Bluetooth devices. In the example, hci_inquiry performs a Bluetooth device discovery and returns a list of detected devices and some basic information about them in the variable ii. On error, it returns -1 and sets errno accordingly. 
+> After choosing the local Bluetooth adapter to use and allocating system resources, the program is ready to scan for nearby Bluetooth devices. In the example, hci_inquiry performs a Bluetooth device discovery and returns a list of detected devices and some basic information about them in the variable __ii__. On __error__, it returns __-1__ and sets errno accordingly. 
 ```c
 int hci_inquiry(int dev_id, int len, int max_rsp, const uint8_t *lap, inquiry_info **ii, long flags);
 ```
-- hci_inquiry is one of the few functions that requires the use of a resource number instead of an open socket, so we use the dev_id returned by hci_get_route. The inquiry lasts for at most 1.28 * len seconds, and at most max_rsp devices will be returned in the output parameter ii, which must be large enough to accommodate max_rsp results. We suggest using a max_rsp of 255 for a standard 10.24 second inquiry. 
-> If flags is set to IREQ_CACHE_FLUSH, then the cache of previously detected devices is flushed before performing the current inquiry. Otherwise, if flags is set to 0, then the results of previous inquiries may be returned, even if the devices aren't in range anymore.
+- hci_inquiry is one of the few functions that requires the use of a resource number instead of an open socket, so we use the dev_id returned by hci_get_route. The inquiry lasts for at most `1.28 * len` seconds, and at most `max_rsp` __devices__ will be returned in the output parameter ii, which must be large enough to accommodate max_rsp results. We suggest using a max_rsp of 255 for a standard 10.24 second inquiry. 
+> If flags is set to `IREQ_CACHE_FLUSH` , then the cache of previously detected devices is flushed before performing the current inquiry. Otherwise, if flags is set to 0, then the results of previous inquiries may be returned, even if the devices aren't in range anymore.
 The inquiry_info structure is defined as :
 ```c
 
@@ -106,4 +106,4 @@ typedef struct {
 int hci_read_remote_name(int sock, const bdaddr_t *ba, int len, 
                          char *name, int timeout)
 ```
-- hci_read_remote_name tries for at most timeout milliseconds to use the socket sock to query the user-friendly name of the device with Bluetooth address ba. On success, hci_read_remote_name returns 0 and copies at most the first len bytes of the device's user-friendly name into name. On failure, it returns -1 and sets errno accordingly. 
+- |hci_read_remote_nam|e tries for at most timeout __milliseconds__ to use the socket sock to query the user-friendly name of the device with Bluetooth address ba. On success, hci_read_remote_name returns __0__ and copies at most the first len bytes of the device's user-friendly name into name. On failure, it returns __-1__ and sets errno accordingly. 
